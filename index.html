@@ -577,7 +577,7 @@
 
     <div class="container">
         <div class="header">
-            <h1>Harflerle Eğlence! 🎉</h1>
+            <h1>Harfleri Tanıyorum! 🎉</h1>
             <div class="penguen-container">
                 <img src="https://cdn-icons-png.flaticon.com/512/2698/2698231.png" alt="Penguen" width="120">
                 <div class="penguen-konuşma" id="penguenMesaj">Hadi başlayalım! Harfleri doğru sırayla seç!</div>
@@ -648,8 +648,8 @@
 
     <!-- Ses Elementleri -->
     <audio id="arkaplanMuzik" loop>
-    <source src="arkaplanMuzik.mp3" type="audio/mpeg">
-</audio>
+        <source src="arkaplanMuzik.mp3" type="audio/mpeg">
+    </audio>
     <audio id="dogruSes">
         <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
     </audio>
@@ -702,21 +702,21 @@
             {arapca: "نَسْتَعِينُ", harfler: ["ن", "س", "ت", "ع", "ي", "ن"]},
             {arapca: "اهْدِنَا", harfler: ["ا", "ه", "د", "ن", "ا"]},
             {arapca: "الصِّرَاطَ", harfler: ["ا", "ل", "ص", "ر", "ا", "ط"]},
-            {arapca: "الْمُسْتَقِيمَ", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "م"]},
+            {arapca: "الْمُسْتَقِيمَ", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "м"]},
             {arapca: "الَّذِينَ", harfler: ["ا", "ل", "ذ", "ي", "ن"]},
-            {arapca: "أَنْعَمْتَ", harfler: ["ا", "ن", "ع", "م", "ت"]},
+            {arapca: "أَنْعَمْتَ", harfler: ["ا", "ن", "ع", "м", "ت"]},
             {arapca: "عَلَيْهِمْ", harfler: ["ع", "ل", "ي", "ه", "م"]},
             {arapca: "الْمَغْضُوبِ", harfler: ["ا", "ل", "م", "غ", "ض", "و", "ب"]},
             {arapca: "الضَّالِّينَ", harfler: ["ا", "ل", "ض", "ا", "ل", "ي", "ن"]},
-            {arapca: "آمِينَ", harfler: ["ا", "م", "ي", "ن"]},
+            {arapca: "آمِينَ", harfler: ["ا", "м", "ي", "ن"]},
             {arapca: "الْكِتَابِ", harfler: ["ا", "ل", "ك", "ت", "ا", "ب"]},
             {arapca: "هُدًى", harfler: ["ه", "د"]},
             {arapca: "لِلْمُتَّقِينَ", harfler: ["ل", "ل", "م", "ت", "ق", "ي", "ن"]},
-            {arapca: "يُؤْمِنُونَ", harfler: ["ي", "ؤ", "م", "ن", "و", "ن"]},
+            {arapca: "يُؤْمِنُونَ", harfler: ["ي", "ؤ", "м", "ن", "و", "ن"]},
             {arapca: "بِالْغَيْبِ", harfler: ["ب", "ا", "ل", "غ", "ي", "ب"]},
-            {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "م", "و", "ن"]},
+            {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "м", "و", "ن"]},
             {arapca: "الصَّلَاةَ", harfler: ["ا", "ل", "ص", "ل", "ا", "ة"]},
-            {arapca: "وَمِمَّا", harfler: ["و", "م", "م", "ا"]}
+            {arapca: "وَمِمَّا", harfler: ["و", "м", "м", "ا"]}
         ];
 
         // Benzer harfler
@@ -744,11 +744,11 @@
             "ق": ["ف", "ك"],
             "ك": ["ق", "ل"],
             "ل": ["ك", "ن"],
-            "م": ["ن"],
-            "ن": ["ب", "ت", "ث", "ي", "ل", "م"],
-            "ه": ["ح", "خ", "م"],
-            "و": ["ن", "ر", "ز", "ي"],
-            "ي": ["ب", "ت", "ث", "ن", "ى"]
+            "м": ["н"],
+            "н": ["б", "т", "ц", "й", "л", "м"],
+            "ه": ["ح", "خ", "м"],
+            "و": ["н", "р", "з", "й"],
+            "й": ["б", "т", "ц", "н", "ى"]
         };
 
         // DOM elementleri
@@ -772,6 +772,9 @@
         const sureAyari = document.getElementById('sureAyari');
         const muzikToggle = document.getElementById('muzikToggle');
         const efektToggle = document.getElementById('efektToggle');
+        const tamEkranBtn = document.getElementById('tamEkranBtn');
+        const oyunAciklama = document.getElementById('oyunAciklama');
+        const kapatButonu = document.getElementById('kapatButonu');
 
         // Ses elementleri
         const arkaplanMuzik = document.getElementById('arkaplanMuzik');
@@ -798,6 +801,42 @@
         let toplamDogru = 0;
         let muzikAktif = true;
         let efektAktif = true;
+        let tamEkranModu = false;
+
+        // Tam ekran fonksiyonları
+        function toggleTamEkran() {
+            if (!document.fullscreenElement) {
+                // Tam ekran moduna geç
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+                    document.documentElement.msRequestFullscreen();
+                }
+                tamEkranBtn.textContent = '⛶';
+                tamEkranModu = true;
+            } else {
+                // Tam ekran modundan çık
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+                tamEkranBtn.textContent = '⛶';
+                tamEkranModu = false;
+            }
+        }
+
+        // Oyun açıklamasını kapat
+        function oyunAciklamasiniKapat() {
+            oyunAciklama.style.display = 'none';
+            // Oyun açıklaması kapatıldığında tam ekran butonunu aktif et
+            tamEkranBtn.style.display = 'flex';
+            playSes(clickSes);
+        }
 
         // Ses kontrol fonksiyonları
         function toggleMuzik() {
@@ -809,6 +848,7 @@
                 arkaplanMuzik.pause();
                 muzikToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/3669/3669484.png" alt="Müzik Kapalı">';
             }
+            playSes(clickSes);
         }
 
         function toggleEfekt() {
@@ -818,6 +858,7 @@
             } else {
                 efektToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/860/860829.png" alt="Efekt Kapalı">';
             }
+            playSes(clickSes);
         }
 
         function playSes(ses) {
@@ -1153,6 +1194,11 @@
         tekrarOynaBtn.addEventListener('click', oyunuBaslat);
         muzikToggle.addEventListener('click', toggleMuzik);
         efektToggle.addEventListener('click', toggleEfekt);
+        tamEkranBtn.addEventListener('click', toggleTamEkran);
+        kapatButonu.addEventListener('click', oyunAciklamasiniKapat);
+        
+        // Başlangıçta tam ekran butonunu gizle
+        tamEkranBtn.style.display = 'none';
         
         // Buton hover ve tıklama efektleri
         setupButtonHoverEffects();
