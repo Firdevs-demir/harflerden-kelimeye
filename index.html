@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harfleri Tanıyorun - Kur'an Öğreniyorum</title>
+    <title>Harfleri Tanıyorum - Kur'an Öğreniyorum</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Comic+Neue:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -373,33 +373,33 @@
         }
         
         .rozet {
-    width: 150px;
-    height: 150px;
-    margin: 20px auto;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    animation: spin 2s linear infinite;
-    display: none; /* Başlangıçta gizli */
-}
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: spin 2s linear infinite;
+            display: none;
+        }
         
         .rozet-altin {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132693.png');
-}
+            background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132693.png');
+        }
         
         .rozet-gumus {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132681.png');
-}
+            background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132681.png');
+        }
         
         .rozet-bronz {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132691.png');
-}
+            background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132691.png');
+        }
         
         @keyframes spin {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.2); }
-    100% { transform: rotate(360deg) scale(1); }
-}
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
         
         .konfeti {
             position: absolute;
@@ -527,6 +527,15 @@
             font-size: 20px;
         }
         
+        /* Müzik yükleme alanı */
+        .muzik-yukleme {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -609,6 +618,13 @@
                 <li><strong>Ses Ayarları:</strong> Sağ üst köşeden sesleri kontrol edin</li>
                 <li><strong>Tam Ekran:</strong> Sağ alt köşedeki ⛶ butonuyla tam ekran yapabilirsiniz</li>
             </ul>
+            
+            <!-- Müzik yükleme alanı -->
+            <div class="muzik-yukleme">
+                <h3>🎵 Kendi Müziğinizi Yükleyin</h3>
+                <input type="file" id="muzikYukle" accept="audio/*">
+                <p>MP3, WAV veya diğer ses formatlarını yükleyebilirsiniz</p>
+            </div>
         </div>
 
         <!-- Oyun Alanı -->
@@ -650,7 +666,7 @@
 
     <!-- Ses Elementleri -->
     <audio id="arkaplanMuzik" loop>
-        <source src="arkaplanMuzik.mp3" type="audio/mpeg">
+        <!-- Varsayılan müzik kaldırıldı, kullanıcı kendi müziğini yükleyecek -->
     </audio>
     <audio id="dogruSes">
         <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
@@ -687,43 +703,55 @@
     </audio>
 
     <script>
-        // Genişletilmiş kelime havuzu (30 kelime) - Harekeli kelimeler, harfler harekesiz
+        // Genişletilmiş kelime havuzu (Hemze ayrımıyla)
         const kelimeler = [
+            // Kat'ı hemzeli örnekler (kesra ve damme/fetha ile)
+            {arapca: "إِقْرَأْ", harfler: ["إ", "ق", "ر", "أ"]}, // Kesralı kat'ı hemze
+            {arapca: "أَمَرَ", harfler: ["أ", "م", "ر"]}, // Fethalı kat'ı hemze
+            {arapca: "أُذُنٌ", harfler: ["أ", "ذ", "ن"]}, // Dammeli kat'ı hemze
+            {arapca: "إِيَّاكَ", harfler: ["إ", "ي", "ا", "ك"]}, // Fatiha'dan
+            {arapca: "أَنْعَمْتَ", harfler: ["أ", "ن", "ع", "م", "ت"]}, // Fatiha'dan
+            
+            // Vasıl hemzeli örnekler
+            {arapca: "اِسْمُ", harfler: ["ا", "س", "م"]}, // Vasıl hemze (baştaki)
+            {arapca: "اَلرَّحْمٰنِ", harfler: ["ا", "ل", "ر", "ح", "م", "ن"]}, // Vasıl hemze
+            {arapca: "اَلرَّحِيمِ", harfler: ["ا", "ل", "ر", "ح", "ي", "م"]}, // Vasıl hemze
+            {arapca: "اَلْحَمْدُ", harfler: ["ا", "ل", "ح", "م", "د"]}, // Vasıl hemze
+            
+            // Diğer kelimeler
             {arapca: "بِسْمِ", harfler: ["ب", "س", "م"]},
             {arapca: "اللّٰهِ", harfler: ["ا", "ل", "ل", "ه"]},
-            {arapca: "الرَّحْمٰنِ", harfler: ["ا", "ل", "ر", "ح", "م", "ن"]},
-            {arapca: "الرَّحِيمِ", harfler: ["ا", "ل", "ر", "ح", "ي", "م"]},
-            {arapca: "الْحَمْدُ", harfler: ["ا", "ل", "ح", "م", "د"]},
             {arapca: "رَبِّ", harfler: ["ر", "ب"]},
             {arapca: "الْعَالَمِينَ", harfler: ["ا", "ل", "ع", "ا", "ل", "م", "ي", "ن"]},
             {arapca: "مَالِكِ", harfler: ["م", "ا", "ل", "ك"]},
             {arapca: "يَوْمِ", harfler: ["ي", "و", "م"]},
             {arapca: "الدِّينِ", harfler: ["ا", "ل", "د", "ي", "ن"]},
-            {arapca: "إِيَّاكَ", harfler: ["ا", "ي", "ا", "ك"]},
             {arapca: "نَعْبُدُ", harfler: ["ن", "ع", "ب", "د"]},
             {arapca: "نَسْتَعِينُ", harfler: ["ن", "س", "ت", "ع", "ي", "ن"]},
             {arapca: "اهْدِنَا", harfler: ["ا", "ه", "د", "ن", "ا"]},
             {arapca: "الصِّرَاطَ", harfler: ["ا", "ل", "ص", "ر", "ا", "ط"]},
             {arapca: "الْمُسْتَقِيمَ", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "م"]},
             {arapca: "الَّذِينَ", harfler: ["ا", "ل", "ذ", "ي", "ن"]},
-            {arapca: "أَنْعَمْتَ", harfler: ["ا", "ن", "ع", "م", "ت"]},
             {arapca: "عَلَيْهِمْ", harfler: ["ع", "ل", "ي", "ه", "م"]},
             {arapca: "الْمَغْضُوبِ", harfler: ["ا", "ل", "م", "غ", "ض", "و", "ب"]},
             {arapca: "الضَّالِّينَ", harfler: ["ا", "ل", "ض", "ا", "ل", "ي", "ن"]},
             {arapca: "آمِينَ", harfler: ["ا", "م", "ي", "ن"]},
             {arapca: "الْكِتَابِ", harfler: ["ا", "ل", "ك", "ت", "ا", "ب"]},
-            {arapca: "هُدًى", harfler: ["ى", "ه", "د"]},
+            {arapca: "هُدًى", harfler: ["ه", "د", "ى"]},
             {arapca: "لِلْمُتَّقِينَ", harfler: ["ل", "ل", "م", "ت", "ق", "ي", "ن"]},
             {arapca: "يُؤْمِنُونَ", harfler: ["ي", "ؤ", "م", "ن", "و", "ن"]},
             {arapca: "بِالْغَيْبِ", harfler: ["ب", "ا", "ل", "غ", "ي", "ب"]},
-            {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "م", "و", "ن"]},
+            {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "م", "و", "n"]},
             {arapca: "الصَّلَاةَ", harfler: ["ا", "ل", "ص", "ل", "ا", "ة"]},
             {arapca: "وَمِمَّا", harfler: ["و", "م", "م", "ا"]}
         ];
 
-        // Benzer harfler
+        // GÜNCELLENMİŞ BENZER HARFLER (Hemze çeşitleri eklendi)
         const benzerHarfler = {
-            "ا": ["ل", "ن"],
+            "ا": ["إ", "أ", "ء", "ل", "ن"],
+            "إ": ["ا", "أ", "ء"], // Kesralı kat'ı hemze
+            "أ": ["ا", "إ", "ء"], // Fetha/Dammeli kat'ı hemze
+            "ء": ["ا", "إ", "أ"], // Hamza tek başına
             "ب": ["ت", "ث", "ن", "ي"],
             "ت": ["ب", "ث", "ن", "ي"],
             "ث": ["ب", "ت", "ن"],
@@ -753,7 +781,6 @@
             "ي": ["ب", "ت", "ث", "ن", "ى"]
         };
 
-
         // DOM elementleri
         const penguenMesaj = document.getElementById('penguenMesaj');
         const soruMetni = document.getElementById('soruMetni');
@@ -778,9 +805,10 @@
         const tamEkranBtn = document.getElementById('tamEkranBtn');
         const oyunAciklama = document.getElementById('oyunAciklama');
         const kapatButonu = document.getElementById('kapatButonu');
+        const muzikYukle = document.getElementById('muzikYukle');
+        const arkaplanMuzik = document.getElementById('arkaplanMuzik');
 
         // Ses elementleri
-        const arkaplanMuzik = document.getElementById('arkaplanMuzik');
         const dogruSes = document.getElementById('dogruSes');
         const yanlisSes = document.getElementById('yanlisSes');
         const tebriklerSes = document.getElementById('tebriklerSes');
@@ -805,6 +833,19 @@
         let muzikAktif = true;
         let efektAktif = true;
         let tamEkranModu = false;
+
+        // Müzik yükleme işlevi
+        muzikYukle.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const objectURL = URL.createObjectURL(file);
+                arkaplanMuzik.src = objectURL;
+                if (muzikAktif) {
+                    arkaplanMuzik.play().catch(e => console.log("Müzik çalma hatası:", e));
+                }
+                penguenKonus("Müziğiniz başarıyla yüklendi! 🎵", 3000);
+            }
+        });
 
         // Tam ekran fonksiyonları
         function toggleTamEkran() {
@@ -845,7 +886,7 @@
         function toggleMuzik() {
             muzikAktif = !muzikAktif;
             if (muzikAktif) {
-                arkaplanMuzik.play();
+                arkaplanMuzik.play().catch(e => console.log("Müzik çalma hatası:", e));
                 muzikToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/3669/3669483.png" alt="Müzik Açık">';
             } else {
                 arkaplanMuzik.pause();
@@ -924,7 +965,9 @@
             hoverSes.volume = 0.3;
             buttonClickSes.volume = 0.7;
             
-            if (muzikAktif) arkaplanMuzik.play();
+            if (muzikAktif) {
+                arkaplanMuzik.play().catch(e => console.log("Müzik çalma hatası:", e));
+            }
             playSes(startSes);
             
             // İlk kelimeyi yükle
@@ -965,8 +1008,12 @@
         function secenekleriHazirla() {
             secenekler.innerHTML = '';
             
-            // Doğru harfleri ekle (harekesiz)
             let tumHarfler = [...mevcutKelime.harfler];
+            
+            // Hemze özel durumu: Kelimede kat'ı hemze varsa vasıl ekle
+            if (mevcutKelime.harfler.includes("إ") || mevcutKelime.harfler.includes("أ")) {
+                tumHarfler.push("ا"); // Vasıl hemze ekle
+            }
             
             // Benzer harflerden ekle (toplam 6 seçenek olacak)
             const benzerEklenecek = Math.max(6 - mevcutKelime.harfler.length, 0);
@@ -991,7 +1038,7 @@
             tumHarfler.forEach((harf) => {
                 const buton = document.createElement('div');
                 buton.className = 'harf-secenek';
-                buton.textContent = harf;
+                buton.textContent = harf; // Hemzeler artık normal renkte
                 buton.dataset.harf = harf;
                 
                 buton.addEventListener('click', () => {
@@ -1025,7 +1072,14 @@
             
             // Her harf için doğru sırada mı kontrol et
             for (let i = 0; i < secilenHarfler.length; i++) {
-                if (secilenHarfler[i] === mevcutKelime.harfler[i]) {
+                // Hemze özel kontrolü
+                if (["ا", "إ", "أ"].includes(mevcutKelime.harfler[i])) {
+                    if (secilenHarfler[i] === mevcutKelime.harfler[i]) {
+                        dogruHarfSayisi++;
+                    }
+                } 
+                // Normal harfler
+                else if (secilenHarfler[i] === mevcutKelime.harfler[i]) {
                     dogruHarfSayisi++;
                 }
             }
@@ -1079,11 +1133,11 @@
             
             // 3 saniye sonra yeni soruya geç
             setTimeout(() => {
-            if (sure > 0) {
-                rozet.style.display = 'none'; // Rozeti gizle
-                sonrakiSoru();
-            }
-        }, 3000); 
+                if (sure > 0) {
+                    rozet.style.display = 'none'; // Rozeti gizle
+                    sonrakiSoru();
+                }
+            }, 3000); 
         }
 
         function sifirla() {
@@ -1120,18 +1174,25 @@
             if (skor >= 500) {
                 basariMesaji = "MÜKEMMEL PERFORMANS!";
                 basariSeviyesi = "Altın Rozet Kazandınız! 🌟";
+                rozet.className = "rozet rozet-altin";
+                rozet.style.display = 'block';
                 konfetiYarat(150);
             } else if (skor >= 300) {
                 basariMesaji = "ÇOK İYİ!";
                 basariSeviyesi = "Gümüş Rozet Kazandınız! ✨";
+                rozet.className = "rozet rozet-gumus";
+                rozet.style.display = 'block';
                 konfetiYarat(100);
             } else if (skor >= 150) {
                 basariMesaji = "İYİ ÇALIŞMA!";
                 basariSeviyesi = "Bronz Rozet Kazandınız! 🔥";
+                rozet.className = "rozet rozet-bronz";
+                rozet.style.display = 'block';
                 konfetiYarat(50);
             } else {
                 basariMesaji = "DAHA FAZLA ÇALIŞMALISIN";
                 basariSeviyesi = "Daha iyisini yapabilirsin! 💪";
+                rozet.style.display = 'none';
             }
             
             sonucEkrani.style.display = 'block';
