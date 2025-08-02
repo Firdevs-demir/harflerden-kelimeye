@@ -14,23 +14,96 @@
             --light: #F7FFF7;
         }
         
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #f0f8ff;
             margin: 0;
             padding: 0;
             color: var(--dark);
-            background-image: url('https://img.freepik.com/free-vector/hand-drawn-colorful-doodle-background_23-2149015287.jpg');
+            background-image: url('https://img.freepik.com/free-vector/desert-landscape-background_23-2148267130.jpg');
             background-size: cover;
             background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
         }
         
+        /* Oyun Açıklama Stilleri */
+        .oyun-aciklama {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-family: 'Open Sans', sans-serif;
+            border-left: 5px solid var(--secondary);
+            position: relative;
+        }
+        
+        .oyun-aciklama h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 15px;
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.8em;
+        }
+        
+        .oyun-aciklama h3 {
+            color: var(--dark);
+            text-align: center;
+            margin: 15px 0 10px 0;
+        }
+        
+        .oyun-aciklama ol, 
+        .oyun-aciklama ul {
+            padding-left: 25px;
+            text-align: left;
+        }
+        
+        .oyun-aciklama li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .kapat-butonu {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Oyun Alanı Stilleri */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -48,7 +121,7 @@
             text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
         }
         
-        .papağan-container {
+        .penguen-container {
             position: relative;
             margin: 20px auto;
             width: 150px;
@@ -60,7 +133,7 @@
             50% { transform: translateY(-15px); }
         }
         
-        .papağan-konuşma {
+        .penguen-konuşma {
             position: absolute;
             top: -70px;
             left: 50%;
@@ -77,7 +150,7 @@
             font-family: 'Comic Neue', cursive;
         }
         
-        .papağan-konuşma:after {
+        .penguen-konuşma:after {
             content: '';
             position: absolute;
             bottom: -15px;
@@ -95,11 +168,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             margin-bottom: 30px;
             transition: all 0.3s;
-        }
-        
-        .oyun-alani:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
         
         .soru-bilgileri {
@@ -122,7 +190,7 @@
         
         .soru-metni {
             font-family: 'Amiri', serif;
-            font-size: 2.5em;
+            font-size: 3em;
             margin: 25px 0;
             color: var(--dark);
             min-height: 70px;
@@ -130,16 +198,17 @@
             padding: 15px;
             border-radius: 15px;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
         
         .olusturulan-kelime {
             font-family: 'Amiri', serif;
-            font-size: 2.5em;
+            font-size: 3em;
             margin: 25px 0;
             color: var(--primary);
             min-height: 70px;
             text-align: center;
-            letter-spacing: 8px;
+            letter-spacing: 0;
             background-color: var(--light);
             padding: 15px;
             border-radius: 15px;
@@ -169,7 +238,7 @@
         
         .harf-secenek {
             font-family: 'Amiri', serif;
-            font-size: 2em;
+            font-size: 2.5em;
             background-color: var(--secondary);
             color: white;
             border: none;
@@ -178,7 +247,7 @@
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
-            height: 70px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -307,11 +376,22 @@
             width: 150px;
             height: 150px;
             margin: 20px auto;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132735.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             animation: spin 2s linear infinite;
+        }
+        
+        .rozet-altin {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/2583/2583344.png');
+        }
+        
+        .rozet-gumus {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/2583/2583329.png');
+        }
+        
+        .rozet-bronz {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/2583/2583309.png');
         }
         
         @keyframes spin {
@@ -392,10 +472,72 @@
             transition: width 0.5s;
             border-radius: 10px;
         }
+
+        /* Ses kontrol butonları */
+        .ses-kontrol {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .ses-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .ses-btn:hover {
+            transform: scale(1.1);
+            background-color: white;
+        }
+
+        .ses-btn img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Tam Ekran Butonu */
+        .tam-ekran-butonu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            font-size: 20px;
+        }
         
         @media (max-width: 600px) {
-            .secenekler {
-                grid-template-columns: repeat(2, 1fr);
+            .container {
+                padding: 10px;
+            }
+            
+            .oyun-aciklama {
+                padding: 20px 15px 15px 15px;
+            }
+            
+            .kapat-butonu {
+                top: 10px;
+                right: 10px;
             }
             
             .soru-metni, .olusturulan-kelime {
@@ -405,25 +547,69 @@
             .harf-secenek {
                 font-size: 1.8em;
                 height: 60px;
+                padding: 10px;
+            }
+            
+            .secenekler {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .kontrol-paneli button {
-                padding: 12px 25px;
-                margin: 0 5px 15px;
+                padding: 12px 20px;
+                margin: 0 5px 10px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Ses Kontrol Butonları -->
+    <div class="ses-kontrol">
+        <button class="ses-btn" id="muzikToggle">
+            <img src="https://cdn-icons-png.flaticon.com/512/3669/3669483.png" alt="Müzik Aç/Kapat">
+        </button>
+        <button class="ses-btn" id="efektToggle">
+            <img src="https://cdn-icons-png.flaticon.com/512/814/814514.png" alt="Efekt Aç/Kapat">
+        </button>
+    </div>
+
+    <!-- Tam Ekran Butonu -->
+    <button class="tam-ekran-butonu" id="tamEkranBtn">⛶</button>
+
     <div class="container">
         <div class="header">
             <h1>Harflerle Eğlence! 🎉</h1>
-            <div class="papağan-container">
-                <img src="https://cdn-icons-png.flaticon.com/512/1830/1830839.png" alt="Papağan" width="120">
-                <div class="papağan-konuşma" id="papağanMesaj">Hadi başlayalım! Harfleri doğru sırayla seç!</div>
+            <div class="penguen-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/2698/2698231.png" alt="Penguen" width="120">
+                <div class="penguen-konuşma" id="penguenMesaj">Hadi başlayalım! Harfleri doğru sırayla seç!</div>
             </div>
         </div>
 
+        <!-- Oyun Açıklama -->
+        <div class="oyun-aciklama" id="oyunAciklama">
+            <button class="kapat-butonu" id="kapatButonu">×</button>
+            <h2>Nasıl Oynanır?</h2>
+            <p style="text-align: center;">🎯 <strong>Oyunun Amacı:</strong> Arapça kelimeleri oluşturan harfleri doğru sırayla seçerek puan kazanmak!</p>
+            
+            <h3>🔠 Oyun Kuralları:</h3>
+            <ol>
+                <li>Ekranda gösterilen harekeli Arapça kelimeyi inceleyin</li>
+                <li>Alttaki harf butonlarından kelimenin harflerini <strong>doğru sırayla</strong> seçin</li>
+                <li>Seçtiğiniz harfler üstteki kutuda görünecek</li>
+                <li>Harf sayısı tamamlandığında <strong>"Kontrol Et"</strong> butonuna basın</li>
+                <li>Doğru sırada her harf için 20 puan, tam doğru kelime için ekstra 50 puan</li>
+                <li>Her 3 doğru cevapta bir seviye atlayacaksınız</li>
+            </ol>
+            
+            <h3>🎮 Kontroller:</h3>
+            <ul>
+                <li><strong>Harf Seçme:</strong> Harf butonlarına tıklayın</li>
+                <li><strong>Sıfırlama:</strong> "Sıfırla" butonuyla seçimleri temizleyin</li>
+                <li><strong>Ses Ayarları:</strong> Sağ üst köşeden sesleri kontrol edin</li>
+                <li><strong>Tam Ekran:</strong> Sağ alt köşedeki ⛶ butonuyla tam ekran yapabilirsiniz</li>
+            </ul>
+        </div>
+
+        <!-- Oyun Alanı -->
         <div class="oyun-alani">
             <div class="soru-bilgileri">
                 <div class="sayaç">
@@ -462,8 +648,8 @@
 
     <!-- Ses Elementleri -->
     <audio id="arkaplanMuzik" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <source src="arkaplanMuzik.mp3" type="audio/mpeg">
+</audio>
     <audio id="dogruSes">
         <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
     </audio>
@@ -482,40 +668,55 @@
     <audio id="winSes">
         <source src="https://www.soundjay.com/human/sounds/applause-08.mp3" type="audio/mpeg">
     </audio>
+    <audio id="selectSes">
+        <source src="https://www.soundjay.com/buttons/sounds/button-03.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="resetSes">
+        <source src="https://www.soundjay.com/buttons/sounds/button-21.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="startSes">
+        <source src="https://www.soundjay.com/buttons/sounds/button-4.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="hoverSes">
+        <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="buttonClickSes">
+        <source src="https://www.soundjay.com/buttons/sounds/button-15.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Genişletilmiş kelime havuzu (30 kelime)
+        // Genişletilmiş kelime havuzu (30 kelime) - Harekeli kelimeler, harfler harekesiz
         const kelimeler = [
-            {arapca: "بسم", anlam: "İsim ile", harfler: ["ب", "س", "م"]},
-            {arapca: "الله", anlam: "Allah", harfler: ["ا", "ل", "ل", "ه"]},
-            {arapca: "الرحمن", anlam: "Rahman", harfler: ["ا", "ل", "ر", "ح", "م", "ن"]},
-            {arapca: "الرحيم", anlam: "Rahim", harfler: ["ا", "ل", "ر", "ح", "ي", "م"]},
-            {arapca: "الحمد", anlam: "Hamd", harfler: ["ا", "ل", "ح", "م", "د"]},
-            {arapca: "رب", anlam: "Rab", harfler: ["ر", "ب"]},
-            {arapca: "العالمين", anlam: "Alemler", harfler: ["ا", "ل", "ع", "ا", "ل", "م", "ي", "ن"]},
-            {arapca: "مالك", anlam: "Malik", harfler: ["م", "ا", "ل", "ك"]},
-            {arapca: "يوم", anlam: "Gün", harfler: ["ي", "و", "م"]},
-            {arapca: "الدين", anlam: "Din", harfler: ["ا", "ل", "د", "ي", "ن"]},
-            {arapca: "إياك", anlam: "Yalnız Sana", harfler: ["ا", "ي", "ي", "ا", "ك"]},
-            {arapca: "نعبد", anlam: "Kulluk ederiz", harfler: ["ن", "ع", "ب", "د"]},
-            {arapca: "نستعين", anlam: "Yardım dileriz", harfler: ["ن", "س", "ت", "ع", "ي", "ن"]},
-            {arapca: "اهدنا", anlam: "Bize hidayet et", harfler: ["ا", "ه", "د", "ن", "ا"]},
-            {arapca: "الصراط", anlam: "Yol", harfler: ["ا", "ل", "ص", "ر", "ا", "ط"]},
-            {arapca: "المستقيم", anlam: "Dosdoğru", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "م"]},
-            {arapca: "الذين", anlam: "Onlar ki", harfler: ["ا", "ل", "ذ", "ي", "ن"]},
-            {arapca: "أنعمت", anlam: "Nimet verdin", harfler: ["ا", "ن", "ع", "م", "ت"]},
-            {arapca: "عليهم", anlam: "Onlara", harfler: ["ع", "ل", "ي", "ه", "م"]},
-            {arapca: "المغضوب", anlam: "Gazaba uğramış", harfler: ["ا", "ل", "م", "غ", "ض", "و", "ب"]},
-            {arapca: "الضالين", anlam: "Sapkınlar", harfler: ["ا", "ل", "ض", "ا", "ل", "ي", "ن"]},
-            {arapca: "آمين", anlam: "Amin", harfler: ["ا", "م", "ي", "ن"]},
-            {arapca: "الكتاب", anlam: "Kitap", harfler: ["ا", "ل", "ك", "ت", "ا", "ب"]},
-            {arapca: "هدى", anlam: "Hidayet", harfler: ["ه", "د", "ى"]},
-            {arapca: "للمتقين", anlam: "Müttakiler için", harfler: ["ل", "ل", "م", "ت", "ق", "ي", "ن"]},
-            {arapca: "يؤمنون", anlam: "İnanırlar", harfler: ["ي", "ؤ", "م", "ن", "و", "ن"]},
-            {arapca: "بالغيب", anlam: "Gayba", harfler: ["ب", "ا", "ل", "غ", "ي", "ب"]},
-            {arapca: "ويقيمون", anlam: "Ve ikame ederler", harfler: ["و", "ي", "ق", "ي", "م", "و", "ن"]},
-            {arapca: "الصلاة", anlam: "Namaz", harfler: ["ا", "ل", "ص", "ل", "ا", "ة"]},
-            {arapca: "ومما", anlam: "Ve onlardan", harfler: ["و", "م", "م", "ا"]}
+            {arapca: "بِسْمِ", harfler: ["ب", "س", "م"]},
+            {arapca: "اللّٰهِ", harfler: ["ا", "ل", "ل", "ه"]},
+            {arapca: "الرَّحْمٰنِ", harfler: ["ا", "ل", "ر", "ح", "م", "ن"]},
+            {arapca: "الرَّحِيمِ", harfler: ["ا", "ل", "ر", "ح", "ي", "م"]},
+            {arapca: "الْحَمْدُ", harfler: ["ا", "ل", "ح", "م", "د"]},
+            {arapca: "رَبِّ", harfler: ["ر", "ب"]},
+            {arapca: "الْعَالَمِينَ", harfler: ["ا", "ل", "ع", "ا", "ل", "م", "ي", "ن"]},
+            {arapca: "مَالِكِ", harfler: ["م", "ا", "ل", "ك"]},
+            {arapca: "يَوْمِ", harfler: ["ي", "و", "م"]},
+            {arapca: "الدِّينِ", harfler: ["ا", "ل", "د", "ي", "ن"]},
+            {arapca: "إِيَّاكَ", harfler: ["ا", "ي", "ي", "ا", "ك"]},
+            {arapca: "نَعْبُدُ", harfler: ["ن", "ع", "ب", "د"]},
+            {arapca: "نَسْتَعِينُ", harfler: ["ن", "س", "ت", "ع", "ي", "ن"]},
+            {arapca: "اهْدِنَا", harfler: ["ا", "ه", "د", "ن", "ا"]},
+            {arapca: "الصِّرَاطَ", harfler: ["ا", "ل", "ص", "ر", "ا", "ط"]},
+            {arapca: "الْمُسْتَقِيمَ", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "م"]},
+            {arapca: "الَّذِينَ", harfler: ["ا", "ل", "ذ", "ي", "ن"]},
+            {arapca: "أَنْعَمْتَ", harfler: ["ا", "ن", "ع", "م", "ت"]},
+            {arapca: "عَلَيْهِمْ", harfler: ["ع", "ل", "ي", "ه", "م"]},
+            {arapca: "الْمَغْضُوبِ", harfler: ["ا", "ل", "م", "غ", "ض", "و", "ب"]},
+            {arapca: "الضَّالِّينَ", harfler: ["ا", "ل", "ض", "ا", "ل", "ي", "ن"]},
+            {arapca: "آمِينَ", harfler: ["ا", "م", "ي", "ن"]},
+            {arapca: "الْكِتَابِ", harfler: ["ا", "ل", "ك", "ت", "ا", "ب"]},
+            {arapca: "هُدًى", harfler: ["ه", "د"]},
+            {arapca: "لِلْمُتَّقِينَ", harfler: ["ل", "ل", "م", "ت", "ق", "ي", "ن"]},
+            {arapca: "يُؤْمِنُونَ", harfler: ["ي", "ؤ", "م", "ن", "و", "ن"]},
+            {arapca: "بِالْغَيْبِ", harfler: ["ب", "ا", "ل", "غ", "ي", "ب"]},
+            {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "م", "و", "ن"]},
+            {arapca: "الصَّلَاةَ", harfler: ["ا", "ل", "ص", "ل", "ا", "ة"]},
+            {arapca: "وَمِمَّا", harfler: ["و", "م", "م", "ا"]}
         ];
 
         // Benzer harfler
@@ -551,7 +752,7 @@
         };
 
         // DOM elementleri
-        const papağanMesaj = document.getElementById('papağanMesaj');
+        const penguenMesaj = document.getElementById('penguenMesaj');
         const soruMetni = document.getElementById('soruMetni');
         const olusturulanKelime = document.getElementById('olusturulanKelime');
         const secenekler = document.getElementById('secenekler');
@@ -569,6 +770,8 @@
         const konfeti = document.getElementById('konfeti');
         const tekrarOynaBtn = document.getElementById('tekrarOynaBtn');
         const sureAyari = document.getElementById('sureAyari');
+        const muzikToggle = document.getElementById('muzikToggle');
+        const efektToggle = document.getElementById('efektToggle');
 
         // Ses elementleri
         const arkaplanMuzik = document.getElementById('arkaplanMuzik');
@@ -578,6 +781,11 @@
         const baslaSes = document.getElementById('baslaSes');
         const clickSes = document.getElementById('clickSes');
         const winSes = document.getElementById('winSes');
+        const selectSes = document.getElementById('selectSes');
+        const resetSes = document.getElementById('resetSes');
+        const startSes = document.getElementById('startSes');
+        const hoverSes = document.getElementById('hoverSes');
+        const buttonClickSes = document.getElementById('buttonClickSes');
 
         // Oyun değişkenleri
         let mevcutKelime = null;
@@ -588,6 +796,70 @@
         let kullanilanKelimeler = [];
         let seviye = 1;
         let toplamDogru = 0;
+        let muzikAktif = true;
+        let efektAktif = true;
+
+        // Ses kontrol fonksiyonları
+        function toggleMuzik() {
+            muzikAktif = !muzikAktif;
+            if (muzikAktif) {
+                arkaplanMuzik.play();
+                muzikToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/3669/3669483.png" alt="Müzik Açık">';
+            } else {
+                arkaplanMuzik.pause();
+                muzikToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/3669/3669484.png" alt="Müzik Kapalı">';
+            }
+        }
+
+        function toggleEfekt() {
+            efektAktif = !efektAktif;
+            if (efektAktif) {
+                efektToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/814/814514.png" alt="Efekt Açık">';
+            } else {
+                efektToggle.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/860/860829.png" alt="Efekt Kapalı">';
+            }
+        }
+
+        function playSes(ses) {
+            if (!efektAktif) return;
+            ses.currentTime = 0;
+            ses.play().catch(e => console.log("Ses çalma hatası:", e));
+        }
+
+        // Buton hover efekti ve sesi
+        function setupButtonHoverEffects() {
+            const buttons = document.querySelectorAll('button, .harf-secenek');
+            buttons.forEach(button => {
+                // Hover efekti
+                button.addEventListener('mouseenter', () => {
+                    if (!button.disabled) {
+                        playSes(hoverSes);
+                        button.style.transform = 'translateY(-3px) scale(1.05)';
+                    }
+                });
+                
+                // Hover çıkış efekti
+                button.addEventListener('mouseleave', () => {
+                    if (!button.disabled && !button.classList.contains('secili')) {
+                        button.style.transform = '';
+                    }
+                });
+                
+                // Tıklama efekti
+                button.addEventListener('mousedown', () => {
+                    if (!button.disabled) {
+                        button.style.transform = 'translateY(1px) scale(0.98)';
+                    }
+                });
+                
+                // Tıklama bırakma efekti
+                button.addEventListener('mouseup', () => {
+                    if (!button.disabled) {
+                        button.style.transform = 'translateY(-3px) scale(1.05)';
+                    }
+                });
+            });
+        }
 
         // Oyunu başlat
         function oyunuBaslat() {
@@ -605,8 +877,11 @@
             arkaplanMuzik.volume = 0.3;
             dogruSes.volume = 0.7;
             yanlisSes.volume = 0.7;
-            baslaSes.play();
-            arkaplanMuzik.play();
+            hoverSes.volume = 0.3;
+            buttonClickSes.volume = 0.7;
+            
+            if (muzikAktif) arkaplanMuzik.play();
+            playSes(startSes);
             
             // İlk kelimeyi yükle
             sonrakiSoru();
@@ -616,7 +891,7 @@
             zamanlayici = setInterval(zamanlayiciGuncelle, 1000);
             
             baslatBtn.disabled = true;
-            papağanKonus("Hadi başlayalım! Harfleri doğru sırayla seç!", 3000);
+            penguenKonus("Hadi başlayalım! Harfleri doğru sırayla seç!", 3000);
         }
 
         function sonrakiSoru() {
@@ -631,7 +906,7 @@
             mevcutKelime = kullanilmayanlar[Math.floor(Math.random() * kullanilmayanlar.length)];
             kullanilanKelimeler.push(mevcutKelime.arapca);
             
-            soruMetni.textContent = `${mevcutKelime.arapca} (${mevcutKelime.anlam})`;
+            soruMetni.textContent = mevcutKelime.arapca;
             olusturulanKelime.textContent = '';
             olusturulanKelime.classList.remove('dogru');
             secilenHarfler = [];
@@ -646,7 +921,7 @@
         function secenekleriHazirla() {
             secenekler.innerHTML = '';
             
-            // Doğru harfleri ekle
+            // Doğru harfleri ekle (harekesiz)
             let tumHarfler = [...mevcutKelime.harfler];
             
             // Benzer harflerden ekle (toplam 6 seçenek olacak)
@@ -676,8 +951,7 @@
                 buton.dataset.harf = harf;
                 
                 buton.addEventListener('click', () => {
-                    clickSes.currentTime = 0;
-                    clickSes.play();
+                    playSes(selectSes);
                     harfSec(harf, buton);
                 });
                 
@@ -690,10 +964,11 @@
                 return;
             }
             
+            playSes(buttonClickSes);
             buton.classList.add('secili');
             secilenHarfler.push(harf);
             
-            // Oluşturulan kelimeyi güncelle
+            // Oluşturulan kelimeyi güncelle (boşluk olmadan)
             olusturulanKelime.textContent = secilenHarfler.join('');
             
             // Eğer yeterli harf seçildiyse kontrol butonunu aktif et
@@ -701,7 +976,7 @@
         }
 
         function kontrolEt() {
-            clickSes.play();
+            playSes(buttonClickSes);
             let dogruHarfSayisi = 0;
             
             // Her harf için doğru sırada mı kontrol et
@@ -716,9 +991,9 @@
             
             // Tamamen doğruysa bonus puan
             if (dogruHarfSayisi === mevcutKelime.harfler.length) {
-                puan += 50; // Bonus puan
+                puan += 50;
                 olusturulanKelime.classList.add('dogru');
-                dogruSes.play();
+                playSes(dogruSes);
                 toplamDogru++;
                 yildizEfekti(10);
                 
@@ -726,20 +1001,20 @@
                 if (toplamDogru >= seviye * 3) {
                     seviye++;
                     seviyeElement.textContent = `🔹 Seviye: ${seviye}`;
-                    papağanKonus(`Tebrikler! Seviye ${seviye}'ye geçtin!`, 3000);
-                    winSes.play();
+                    penguenKonus(`Tebrikler! Seviye ${seviye}'ye geçtin!`, 3000);
+                    playSes(winSes);
                 }
                 
                 // Progress bar güncelle
                 progressBar.style.width = `${(toplamDogru % 3) * 33.33}%`;
                 
-                papağanKonus("Harika! Tamamen doğru! 🎉", 3000);
+                penguenKonus("Harika! Tamamen doğru! 🎉", 3000);
             } else if (dogruHarfSayisi > 0) {
-                dogruSes.play();
-                papağanKonus(`${dogruHarfSayisi} harf doğru sırada!`, 3000);
+                playSes(dogruSes);
+                penguenKonus(`${dogruHarfSayisi} harf doğru sırada!`, 3000);
             } else {
-                yanlisSes.play();
-                papağanKonus("Yanlış sıralama, tekrar deneyin! 😊", 3000);
+                playSes(yanlisSes);
+                penguenKonus("Yanlış sıralama, tekrar deneyin! 😊", 3000);
             }
             
             // Skor güncelle
@@ -767,7 +1042,7 @@
         }
 
         function sifirla() {
-            clickSes.play();
+            playSes(resetSes);
             secilenHarfler = [];
             olusturulanKelime.textContent = '';
             kontrolEtBtn.disabled = true;
@@ -790,8 +1065,8 @@
 
         function oyunuBitir() {
             clearInterval(zamanlayici);
-            arkaplanMuzik.pause();
-            tebriklerSes.play();
+            if (muzikAktif) arkaplanMuzik.pause();
+            playSes(tebriklerSes);
             
             // Sonuçları hazırla
             let basariMesaji = "";
@@ -858,12 +1133,12 @@
             }
         }
 
-        function papağanKonus(mesaj, sure) {
-            papağanMesaj.textContent = mesaj;
-            papağanMesaj.style.opacity = '1';
+        function penguenKonus(mesaj, sure) {
+            penguenMesaj.textContent = mesaj;
+            penguenMesaj.style.opacity = '1';
             
             setTimeout(() => {
-                papağanMesaj.style.opacity = '0';
+                penguenMesaj.style.opacity = '0';
             }, sure);
         }
 
@@ -876,10 +1151,15 @@
         sifirlaBtn.addEventListener('click', sifirla);
         baslatBtn.addEventListener('click', oyunuBaslat);
         tekrarOynaBtn.addEventListener('click', oyunuBaslat);
+        muzikToggle.addEventListener('click', toggleMuzik);
+        efektToggle.addEventListener('click', toggleEfekt);
+        
+        // Buton hover ve tıklama efektleri
+        setupButtonHoverEffects();
         
         // Başlangıç mesajı
         setTimeout(() => {
-            papağanKonus("Arapça harfleri eğlenerek öğrenmeye hazır mısın? 😊", 3000);
+            penguenKonus("Arapça harfleri eğlenerek öğrenmeye hazır mısın? 😊", 3000);
         }, 1000);
     </script>
 </body>
