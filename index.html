@@ -373,32 +373,33 @@
         }
         
         .rozet {
-            width: 150px;
-            height: 150px;
-            margin: 20px auto;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            animation: spin 2s linear infinite;
-        }
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: spin 2s linear infinite;
+    display: none; /* Başlangıçta gizli */
+}
         
         .rozet-altin {
-            background-image: url('https://cdn-icons-png.flaticon.com/512/2583/2583344.png');
-        }
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132693.png');
+}
         
         .rozet-gumus {
-            background-image: url('https://cdn-icons-png.flaticon.com/512/2583/2583329.png');
-        }
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132681.png');
+}
         
         .rozet-bronz {
-            background-image: url('https://cdn-icons-png.flaticon.com/512/2583/2583309.png');
-        }
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3132/3132691.png');
+}
         
         @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.2); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
         
         .konfeti {
             position: absolute;
@@ -578,6 +579,7 @@
     <div class="container">
         <div class="header">
             <h1>Harfleri Tanıyorum! 🎉</h1>
+            <h1>Haydi بسم الله 🦉</h1>
             <div class="penguen-container">
                 <img src="https://cdn-icons-png.flaticon.com/512/2698/2698231.png" alt="Penguen" width="120">
                 <div class="penguen-konuşma" id="penguenMesaj">Hadi başlayalım! Harfleri doğru sırayla seç!</div>
@@ -686,71 +688,71 @@
 
     <script>
         // Genişletilmiş kelime havuzu (30 kelime) - Harekeli kelimeler, harfler harekesiz
-        // Genişletilmiş kelime havuzu (30 kelime) - Harekeli kelimeler, harfler harekesiz
-const kelimeler = [
-    {arapca: "بِسْمِ", harfler: ["ب", "س", "م"]},
-    {arapca: "اللّٰهِ", harfler: ["ا", "ل", "ل", "ه"]},
-    {arapca: "الرَّحْمٰنِ", harfler: ["ا", "ل", "ر", "ح", "م", "ن"]},
-    {arapca: "الرَّحِيمِ", harfler: ["ا", "ل", "ر", "ح", "ي", "م"]},
-    {arapca: "الْحَمْدُ", harfler: ["ا", "ل", "ح", "م", "د"]},
-    {arapca: "رَبِّ", harfler: ["ر", "ب"]},
-    {arapca: "الْعَالَمِينَ", harfler: ["ا", "ل", "ع", "ا", "ل", "م", "ي", "ن"]},
-    {arapca: "مَالِكِ", harfler: ["م", "ا", "ل", "ك"]},
-    {arapca: "يَوْمِ", harfler: ["ي", "و", "م"]},
-    {arapca: "الدِّينِ", harfler: ["ا", "ل", "د", "ي", "ن"]},
-    {arapca: "إِيَّاكَ", harfler: ["ا", "ي", "ي", "ا", "ك"]},
-    {arapca: "نَعْبُدُ", harfler: ["ن", "ع", "ب", "د"]},
-    {arapca: "نَسْتَعِينُ", harfler: ["ن", "س", "ت", "ع", "ي", "ن"]},
-    {arapca: "اهْدِنَا", harfler: ["ا", "ه", "د", "ن", "ا"]},
-    {arapca: "الصِّرَاطَ", harfler: ["ا", "ل", "ص", "ر", "ا", "ط"]},
-    {arapca: "الْمُسْتَقِيمَ", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "م"]},
-    {arapca: "الَّذِينَ", harfler: ["ا", "ل", "ذ", "ي", "ن"]},
-    {arapca: "أَنْعَمْتَ", harfler: ["ا", "ن", "ع", "م", "ت"]},
-    {arapca: "عَلَيْهِمْ", harfler: ["ع", "ل", "ي", "ه", "م"]},
-    {arapca: "الْمَغْضُوبِ", harfler: ["ا", "ل", "م", "غ", "ض", "و", "ب"]},
-    {arapca: "الضَّالِّينَ", harfler: ["ا", "ل", "ض", "ا", "ل", "ي", "ن"]},
-    {arapca: "آمِينَ", harfler: ["ا", "م", "ي", "ن"]},
-    {arapca: "الْكِتَابِ", harfler: ["ا", "ل", "ك", "ت", "ا", "ب"]},
-    {arapca: "هُدًى", harfler: ["ه", "د"]},
-    {arapca: "لِلْمُتَّقِينَ", harfler: ["ل", "ل", "م", "ت", "ق", "ي", "ن"]},
-    {arapca: "يُؤْمِنُونَ", harfler: ["ي", "ؤ", "م", "ن", "و", "ن"]},
-    {arapca: "بِالْغَيْبِ", harfler: ["ب", "ا", "ل", "غ", "ي", "ب"]},
-    {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "م", "و", "ن"]},
-    {arapca: "الصَّلَاةَ", harfler: ["ا", "ل", "ص", "ل", "ا", "ة"]},
-    {arapca: "وَمِمَّا", harfler: ["و", "م", "م", "ا"]}
-];
+        const kelimeler = [
+            {arapca: "بِسْمِ", harfler: ["ب", "س", "م"]},
+            {arapca: "اللّٰهِ", harfler: ["ا", "ل", "ل", "ه"]},
+            {arapca: "الرَّحْمٰنِ", harfler: ["ا", "ل", "ر", "ح", "م", "ن"]},
+            {arapca: "الرَّحِيمِ", harfler: ["ا", "ل", "ر", "ح", "ي", "م"]},
+            {arapca: "الْحَمْدُ", harfler: ["ا", "ل", "ح", "م", "د"]},
+            {arapca: "رَبِّ", harfler: ["ر", "ب"]},
+            {arapca: "الْعَالَمِينَ", harfler: ["ا", "ل", "ع", "ا", "ل", "م", "ي", "ن"]},
+            {arapca: "مَالِكِ", harfler: ["م", "ا", "ل", "ك"]},
+            {arapca: "يَوْمِ", harfler: ["ي", "و", "م"]},
+            {arapca: "الدِّينِ", harfler: ["ا", "ل", "د", "ي", "ن"]},
+            {arapca: "إِيَّاكَ", harfler: ["ا", "ي", "ا", "ك"]},
+            {arapca: "نَعْبُدُ", harfler: ["ن", "ع", "ب", "د"]},
+            {arapca: "نَسْتَعِينُ", harfler: ["ن", "س", "ت", "ع", "ي", "ن"]},
+            {arapca: "اهْدِنَا", harfler: ["ا", "ه", "د", "ن", "ا"]},
+            {arapca: "الصِّرَاطَ", harfler: ["ا", "ل", "ص", "ر", "ا", "ط"]},
+            {arapca: "الْمُسْتَقِيمَ", harfler: ["ا", "ل", "م", "س", "ت", "ق", "ي", "م"]},
+            {arapca: "الَّذِينَ", harfler: ["ا", "ل", "ذ", "ي", "ن"]},
+            {arapca: "أَنْعَمْتَ", harfler: ["ا", "ن", "ع", "م", "ت"]},
+            {arapca: "عَلَيْهِمْ", harfler: ["ع", "ل", "ي", "ه", "م"]},
+            {arapca: "الْمَغْضُوبِ", harfler: ["ا", "ل", "م", "غ", "ض", "و", "ب"]},
+            {arapca: "الضَّالِّينَ", harfler: ["ا", "ل", "ض", "ا", "ل", "ي", "ن"]},
+            {arapca: "آمِينَ", harfler: ["ا", "م", "ي", "ن"]},
+            {arapca: "الْكِتَابِ", harfler: ["ا", "ل", "ك", "ت", "ا", "ب"]},
+            {arapca: "هُدًى", harfler: ["ى", "ه", "د"]},
+            {arapca: "لِلْمُتَّقِينَ", harfler: ["ل", "ل", "م", "ت", "ق", "ي", "ن"]},
+            {arapca: "يُؤْمِنُونَ", harfler: ["ي", "ؤ", "م", "ن", "و", "ن"]},
+            {arapca: "بِالْغَيْبِ", harfler: ["ب", "ا", "ل", "غ", "ي", "ب"]},
+            {arapca: "وَيُقِيمُونَ", harfler: ["و", "ي", "ق", "ي", "م", "و", "ن"]},
+            {arapca: "الصَّلَاةَ", harfler: ["ا", "ل", "ص", "ل", "ا", "ة"]},
+            {arapca: "وَمِمَّا", harfler: ["و", "م", "م", "ا"]}
+        ];
 
-// Benzer harfler
-const benzerHarfler = {
-    "ا": ["ل", "ن"],
-    "ب": ["ت", "ث", "ن", "ي"],
-    "ت": ["ب", "ث", "ن", "ي"],
-    "ث": ["ب", "ت", "ن"],
-    "ج": ["ح", "خ"],
-    "ح": ["ج", "خ", "ه"],
-    "خ": ["ج", "ح", "ه"],
-    "د": ["ذ"],
-    "ذ": ["د", "ز", "ض", "ظ"],
-    "ر": ["ز", "ن"],
-    "ز": ["ر", "ذ"],
-    "س": ["ش"],
-    "ش": ["س", "ص"],
-    "ص": ["ض", "ش"],
-    "ض": ["ص", "ط", "ظ"],
-    "ط": ["ظ", "ض"],
-    "ظ": ["ط", "ض", "ذ"],
-    "ع": ["غ"],
-    "غ": ["ع"],
-    "ف": ["ق"],
-    "ق": ["ف", "ك"],
-    "ك": ["ق", "ل"],
-    "ل": ["ك", "ن"],
-    "م": ["ن"],
-    "ن": ["ب", "ت", "ث", "ي", "ل", "م"],
-    "ه": ["ح", "خ", "م"],
-    "و": ["ن", "ر", "ز", "ي"],
-    "ي": ["ب", "ت", "ث", "ن", "ى"]
-};
+        // Benzer harfler
+        const benzerHarfler = {
+            "ا": ["ل", "ن"],
+            "ب": ["ت", "ث", "ن", "ي"],
+            "ت": ["ب", "ث", "ن", "ي"],
+            "ث": ["ب", "ت", "ن"],
+            "ج": ["ح", "خ"],
+            "ح": ["ج", "خ", "ه"],
+            "خ": ["ج", "ح", "ه"],
+            "د": ["ذ"],
+            "ذ": ["د", "ز", "ض", "ظ"],
+            "ر": ["ز", "ن"],
+            "ز": ["ر", "ذ"],
+            "س": ["ش"],
+            "ش": ["س", "ص"],
+            "ص": ["ض", "ش"],
+            "ض": ["ص", "ط", "ظ"],
+            "ط": ["ظ", "ض"],
+            "ظ": ["ط", "ض", "ذ"],
+            "ع": ["غ"],
+            "غ": ["ع"],
+            "ف": ["ق"],
+            "ق": ["ف", "ك"],
+            "ك": ["ق", "ل"],
+            "ل": ["ك", "ن"],
+            "م": ["ن"],
+            "ن": ["ب", "ت", "ث", "ي", "ل", "م"],
+            "ه": ["ح", "خ", "م"],
+            "و": ["ن", "ر", "ز", "ي"],
+            "ي": ["ب", "ت", "ث", "ن", "ى"]
+        };
+
 
         // DOM elementleri
         const penguenMesaj = document.getElementById('penguenMesaj');
@@ -1050,7 +1052,7 @@ const benzerHarfler = {
                 // Progress bar güncelle
                 progressBar.style.width = `${(toplamDogru % 3) * 33.33}%`;
                 
-                penguenKonus("Harika! Tamamen doğru! 🎉", 3000);
+                penguenKonus("Maşaallah! Tamamen doğru! 🎉", 3000);
             } else if (dogruHarfSayisi > 0) {
                 playSes(dogruSes);
                 penguenKonus(`${dogruHarfSayisi} harf doğru sırada!`, 3000);
@@ -1075,12 +1077,13 @@ const benzerHarfler = {
                 }
             });
             
-            // 4 saniye sonra yeni soruya geç
+            // 3 saniye sonra yeni soruya geç
             setTimeout(() => {
-                if (sure > 0) {
-                    sonrakiSoru();
-                }
-            }, 4000);
+            if (sure > 0) {
+                rozet.style.display = 'none'; // Rozeti gizle
+                sonrakiSoru();
+            }
+        }, 3000); 
         }
 
         function sifirla() {
